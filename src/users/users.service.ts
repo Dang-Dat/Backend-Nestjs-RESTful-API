@@ -95,6 +95,7 @@ export class UsersService {
   }
 
   async update(updateUserDto: UpdateUserDto, @UserDecorator() user: IUser) {
+
     const updated = await this.userModel.updateOne({ _id: updateUserDto._id },
       {
         ...updateUserDto,
@@ -111,7 +112,7 @@ export class UsersService {
       return "not found user"
     }
     const findUser = await this.userModel.findById({ id })
-    if (findUser.email === "admin@gamil.com") {
+    if (findUser && findUser.email === "admin@gamil.com") {
       throw new BadRequestException("khong the xoa tai khoan admin")
     }
     await this.userModel.updateOne({ _id: id },
@@ -136,6 +137,7 @@ export class UsersService {
 
     //fetch user role
     const userRole = await this.roleModel.findOne({ name: USER_ROLE })
+
     const hassPassword = this.getHashPassword(password);
     let newRegister = await this.userModel.create({
       name, email, password: hassPassword, age, gender, address,

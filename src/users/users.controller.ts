@@ -35,13 +35,14 @@ export class UsersController {
   @ResponseMessage("Fetch user by id")
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const founduser = await this.usersService.findOne(id);
-    return founduser
+    const foundUser = await this.usersService.findOne(id);
+    return foundUser
   }
 
   @ResponseMessage("Updated a User")
   @Patch()
   async update(@Body() updateUserDto: UpdateUserDto, @User() user: IUser) {
+    console.log(updateUserDto.role)
     let updateUser = await this.usersService.update(updateUserDto, user);
     return {
       updateUser

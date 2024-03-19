@@ -27,7 +27,7 @@ export class CreateUserDto {
     gender: string
 
     @IsMongoId({ message: "role is a mongo Id" })
-    @IsNotEmpty({ message: "Role khong duoc de trong" })
+    @IsNotEmpty({ message: "role khong duoc de trong" })
     role: mongoose.Schema.Types.ObjectId;
 
     @IsNotEmptyObject()

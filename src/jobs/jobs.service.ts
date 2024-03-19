@@ -64,10 +64,10 @@ export class JobsService {
       _id: id
     })
   }
-  
+
 
   async update(id: string, updateJobDto: UpdateJobDto, user: IUser) {
-    return this.jobModel.updateOne({ _id: updateJobDto._id }, { ...updateJobDto, updatedBy: { _id: user._id, email: user.email } })
+    return this.jobModel.updateOne({ _id: id }, { ...updateJobDto, updatedBy: { _id: user._id, email: user.email } })
   }
 
   async remove(id: string, user: IUser) {

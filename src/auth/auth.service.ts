@@ -7,7 +7,6 @@ import { create } from 'domain';
 import { ConfigService } from '@nestjs/config';
 import ms from 'ms';
 import { Request, Response } from 'express';
-import { error } from 'console';
 import { RolesService } from 'src/roles/roles.service';
 
 @Injectable()
@@ -27,10 +26,10 @@ export class AuthService {
             if (isValid === true) {
                 const userRole = user.role as unknown as { _id: string; name: string }
                 const temp = await this.rolesService.findOne(userRole._id)
-                console.log(temp)
+
                 const objUser = {
                     ...user.toObject(),
-                    permissios: temp?.permissions ?? []
+                    permissions: temp?.permissions ?? []
                 }
                 return objUser;
             }
@@ -66,7 +65,8 @@ export class AuthService {
                 name,
                 email,
                 role,
-                permissions
+                permissions,
+
             }
         }
     }

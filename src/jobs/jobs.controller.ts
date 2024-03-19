@@ -34,7 +34,7 @@ export class JobsController {
   }
 
   @ResponseMessage('Updated job')
-  @Patch()
+  @Patch(':id')
   update(@Param('id') id: string,
     @Body() updateJobDto: UpdateJobDto,
     @User() user: IUser

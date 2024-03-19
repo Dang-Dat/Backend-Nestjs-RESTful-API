@@ -52,18 +52,18 @@ export class CompaniesService {
     }
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new BadRequestException(`not found company with id=${id}`)
     }
-    return this.companyModel.findById({
+    return await this.companyModel.findById({
       _id: id
     })
   }
 
-  async update(updateCompanyDto: UpdateCompanyDto, user: IUser) {
+  async update(id: string, updateCompanyDto: UpdateCompanyDto, user: IUser) {
 
-    return await this.companyModel.updateOne({ _id: updateCompanyDto._id }, { ...updateCompanyDto, updatedBy: { _id: user._id, email: user.email } })
+    return await this.companyModel.updateOne({ _id: id }, { ...updateCompanyDto, updatedBy: { _id: user._id, email: user.email } })
   }
 
   async remove(id: string, user: IUser) {

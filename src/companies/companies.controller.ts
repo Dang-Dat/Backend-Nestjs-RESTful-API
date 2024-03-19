@@ -35,11 +35,13 @@ export class CompaniesController {
     return this.companiesService.findOne(id);
   }
 
-  @Patch()
+  @ResponseMessage('Update company')
+  @Patch(':id')
   update(
+    @Param(':id') id: string,
     @Body() updateCompanyDto: UpdateCompanyDto, @User() user: IUser) {
     if (updateCompanyDto && updateCompanyDto._id) {
-      return this.companiesService.update(updateCompanyDto, user);
+      return this.companiesService.update(id, updateCompanyDto, user);
     }
     else {
       return "update khong thanh cong"
